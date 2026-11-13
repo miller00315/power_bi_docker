@@ -4,7 +4,7 @@ PBI_EXE  := C:\Program Files\Microsoft Power BI Desktop\bin\PBIDesktop.exe
 RDP_OPTS := /v:127.0.0.1:3389 /u:$(RDP_USER) /p:$(RDP_PASS) /cert-ignore
 
 .DEFAULT_GOAL := powerbi
-.PHONY: powerbi up stop status logs tela clean help
+.PHONY: powerbi up stop status logs tela clean help dados
 
 help: ## Lista os comandos
 	@grep -E '^[a-z]+:.*##' $(MAKEFILE_LIST) | awk -F':.*## ' '{printf "  make %-8s %s\n", $$1, $$2}'
@@ -33,3 +33,6 @@ tela: up ## Abre a área de trabalho do Windows no navegador
 
 clean: ## APAGA o Windows instalado (pede confirmação)
 	@read -p "Apagar o disco do Windows em ./storage? [s/N] " r && [ "$$r" = s ] && docker compose down && rm -rf storage/* || echo "Cancelado."
+
+dados: ## Lista o que está na pasta compartilhada
+	@cd shared && find . -mindepth 1 ! -name .gitkeep | sort
