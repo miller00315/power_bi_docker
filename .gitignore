@@ -1,0 +1,6 @@
+# Disco do Windows (40 GB) — nunca versionar
+storage/
+
+# Arquivos trocados com o Windows
+shared/*
+!shared/.gitkeep

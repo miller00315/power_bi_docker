@@ -1,0 +1,28 @@
+services:
+  windows:
+    image: dockurr/windows
+    container_name: powerbi-windows
+    environment:
+      VERSION: "tiny11"        # Windows 11 enxuto (sem apps extras)
+      REGION: "pt-BR"
+      KEYBOARD: "pt-BR"
+      RAM_SIZE: "4G"
+      CPU_CORES: "3"
+      DISK_SIZE: "40G"         # alocação dinâmica
+      USERNAME: "aluno"
+      PASSWORD: "aluno"
+    devices:
+      - /dev/kvm
+      - /dev/net/tun
+    cap_add:
+      - NET_ADMIN
+    ports:
+      - "127.0.0.1:8006:8006"  # tela do Windows no navegador (instalação/suporte)
+      - "127.0.0.1:3389:3389/tcp"  # RDP / RemoteApp do Power BI
+      - "127.0.0.1:3389:3389/udp"
+    volumes:
+      - ./storage:/storage     # disco do Windows
+      - ./oem:/oem             # script que instala o Power BI
+      - ./shared:/shared       # pasta compartilhada com o Linux
+    restart: "no"
+    stop_grace_period: 2m
