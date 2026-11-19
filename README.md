@@ -13,6 +13,7 @@ Roda o **Power BI Desktop** no Linux com uma VM Windows 11 enxuta (tiny11) dentr
 
 ```bash
 make            # = make powerbi: liga o Windows (se preciso) e abre o Power BI
+make rdp        # área de trabalho completa do Windows via RDP (FreeRDP)
 make tela       # área de trabalho completa do Windows no navegador (http://localhost:8006)
 make stop       # desliga o Windows (os dados ficam salvos)
 make status     # mostra se o contêiner está ligado
